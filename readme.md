@@ -82,21 +82,21 @@ This project is a Google Apps Script that automates daily check-ins for multiple
 
 #### Required Fields
 
-- **`value`**: This is a string that contains the `ltoken_v2` and `ltuid_v2` values required for authentication. You can obtain these values from your browser's cookies when logged into HoYoLab. Use the browser's developer tools to inspect cookies for the `ltoken_v2` and `ltuid_v2` values.
+**`value`**: This is a string that contains the `ltoken_v2` and `ltuid_v2` values required for authentication. You can obtain these values from your browser's cookies when logged into HoYoLab. Use the browser's developer tools to inspect cookies for the `ltoken_v2` and `ltuid_v2` values.
 
   **How to Obtain `value`:**
 
-  1. Log into Check in page in your web browser.
+1. Log into Check in page in your web browser.
 
-  - [Honkai Impact 3rd Check in Page](https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111&hyl_presentation_style=fullscreen&hyl_auth_required=true)
-  - [Genshin Impact Check in Page](https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481)
-  - [Honkai: Star Rail Check in Page](https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311)
-  - [Zenless Zone Zero Check in Page](https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091)
+      - [Honkai Impact 3rd Check in Page](https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111&hyl_presentation_style=fullscreen&hyl_auth_required=true)
+      - [Genshin Impact Check in Page](https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481)
+      - [Honkai: Star Rail Check in Page](https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311)
+      - [Zenless Zone Zero Check in Page](https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091)
 
-  2. Right-click on the page and select `Inspect` (or press `F12`) to open Developer Tools.
-  3. Go to the `Application` tab and find the `Cookies` section on the left sidebar.
-  4. Locate the `ltoken_v2` and `ltuid_v2` cookies.
-  5. Combine them into a single string in the format `ltoken_v2=<value>; ltuid_v2=<value>;`.
+2. Right-click on the page and select `Inspect` (or press `F12`) to open Developer Tools.
+3. Go to the `Application` tab and find the `Cookies` section on the left sidebar.
+4. Locate the `ltoken_v2` and `ltuid_v2` cookies.
+5. Combine them into a single string in the format `ltoken_v2=<value>; ltuid_v2=<value>;`.
 
   For example:
 
