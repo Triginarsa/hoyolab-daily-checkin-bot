@@ -205,6 +205,15 @@ class Game {
           icon: awardsData.data[info.data.total].icon,
         };
 
+        const sign = await this.sign(account);
+        if (!sign.success) {
+          this.handleError(
+            `Failed to sign in for ${accountDetails.nickname}`,
+            account
+          );
+          continue;
+        }
+
         console.info(
           `${this.constants.game}: ${accountDetails.nickname} Checking in... Today's Reward: ${awardObject.name} x${awardObject.count}`
         );
@@ -273,6 +282,34 @@ class Game {
     }
   }
 
+  async sign(account) {
+    try {
+      const payload = { act_id: this.constants.ACT_ID };
+      const options = {
+        method: "POST",
+        contentType: "application/json",
+        headers: {
+          "User-Agent": this.userAgent,
+          Cookie: account.value,
+        },
+        payload: JSON.stringify(payload),
+      };
+
+      const res = UrlFetchApp.fetch(this.constants.url.sign, options);
+      const body = JSON.parse(res.getContentText());
+
+      if (res.getResponseCode() !== 200 || body.retcode !== 0) {
+        this.handleError(`${this.fullName}:sign`, "Failed to sign in.");
+        return { success: false, data: body };
+      }
+
+      return { success: true };
+    } catch (error) {
+      this.handleError(`${this.fullName}:sign`, "Failed to sign in.", error);
+      return { success: false, data: error };
+    }
+  }
+
   async getSignInfo(account) {
     const url = `${this.constants.url.info}?act_id=${this.constants.ACT_ID}`;
     const options = {
@@ -335,7 +372,7 @@ class DiscordNotifier {
       color: 0x5865f2,
       title: `${data.assets.game} Login Hari ke-${data.total}`,
       author: {
-        name: `${data.account.nickname}`,
+        name: `${data.account.uid} - ${data.account.nickname}`,
         icon_url: data.assets.iconLogo,
       },
       thumbnail: { url: data.award.icon },
@@ -417,3 +454,4 @@ function checkInAllGames() {
     }
   }
 }
+
