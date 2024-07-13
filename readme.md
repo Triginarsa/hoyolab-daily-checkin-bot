@@ -56,7 +56,7 @@ This project is a Google Apps Script that automates daily check-ins for multiple
    - Click on `New Project`.
 2. **Copy Script**
 
-   - Copy the contents of `main.js` from this repository: [main.js]()
+   - Copy the contents of `main.js` from this repository: [main.js](https://github.com/Triginarsa/hoyolab-daily-checkin-bot/blob/main/main.js)
    - Paste it into the Google Apps Script editor.
 
 ### Set Up Triggers
