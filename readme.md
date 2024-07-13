@@ -31,7 +31,6 @@ This project is a Google Apps Script that automates daily check-ins for multiple
 - Automated daily check-ins for multiple HoYoLab games
 - Support for multiple accounts per game
 - Optional notifications to a Discord webhook
-- Graceful error handling and logging
 
 ## Supported Games
 
