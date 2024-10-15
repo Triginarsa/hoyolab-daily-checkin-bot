@@ -97,9 +97,9 @@ const DEFAULT_CONSTANTS = {
         "https://hyl-static-res-prod.hoyolab.com/communityweb/business/nap.png",
     },
     url: {
-      info: "https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/info",
-      home: "https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/home",
-      sign: "https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/sign",
+      info: "https://sg-public-api.hoyolab.com/event/luna/zzz/os/info",
+      home: "https://sg-public-api.hoyolab.com/event/luna/zzz/os/home",
+      sign: "https://sg-public-api.hoyolab.com/event/luna/zzz/os/sign",
     },
   },
 };
@@ -291,6 +291,7 @@ class Game {
         headers: {
           "User-Agent": this.userAgent,
           Cookie: account.value,
+          "x-rpc-signgame": this.getSignGameHeader(),
         },
         payload: JSON.stringify(payload),
       };
@@ -310,10 +311,26 @@ class Game {
     }
   }
 
+  getSignGameHeader() {
+    switch (this.name) {
+      case "starrail":
+        return "hkrpg";
+      case "genshin":
+        return "hk4e";
+      case "zenless":
+        return "zzz";
+      default:
+        return "";
+    }
+  }
+
   async getSignInfo(account) {
     const url = `${this.constants.url.info}?act_id=${this.constants.ACT_ID}`;
     const options = {
-      headers: { "User-Agent": this.userAgent, Cookie: account.value },
+      headers: {
+        Cookie: account.value,
+        "x-rpc-signgame": this.getSignGameHeader(),
+      },
     };
     try {
       const body = await this.fetchWithRetry(url, options);
@@ -337,7 +354,11 @@ class Game {
   async getAwardsData(account) {
     const url = `${this.constants.url.home}?act_id=${this.constants.ACT_ID}`;
     const options = {
-      headers: { "User-Agent": this.userAgent, Cookie: account.value },
+      headers: {
+        "User-Agent": this.userAgent,
+        Cookie: account.value,
+        "x-rpc-signgame": this.getSignGameHeader(),
+      },
     };
     try {
       const body = await this.fetchWithRetry(url, options);
@@ -454,4 +475,3 @@ function checkInAllGames() {
     }
   }
 }
-
